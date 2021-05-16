@@ -25,7 +25,8 @@ func GetWorkerResultHandler(c *gin.Context) {
 		c.JSON(http.StatusNotImplemented, err.Error())
 		return
 	}
-	fmt.Println(reqData.Index)
+	fmt.Println("index: ", reqData.Index)
+	fmt.Println("value: ", fib.Value)
 	c.JSON(http.StatusOK, fib)
 }
 
