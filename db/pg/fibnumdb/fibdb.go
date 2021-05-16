@@ -5,6 +5,7 @@ import (
 	"fmt"
 
 	_ "github.com/lib/pq"
+	// "github.com/thanhftu/api-multi/utils"
 )
 
 // const (
@@ -16,7 +17,7 @@ import (
 // )
 const (
 	dbDriver = "postgres"
-	dbSource = "postgres://root:mysecretpassword@localhost:5432/root?sslmode=disable"
+	dbSource = "postgresql://root:secret@postgres:5432/root?sslmode=disable"
 )
 
 var (
@@ -24,10 +25,16 @@ var (
 )
 
 func init() {
-	// datasourceName := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", host, port, user, password, dbname)
 	var err error
+	// config, err := utils.LoadConfig(".")
+	// if err != nil {
+	// 	log.Fatal("cannot load config", err)
+	// }
+
 	Client, err = sql.Open(dbDriver, dbSource)
+	// Client, err = sql.Open(dbDriver, dbSource)
 	if err != nil {
+		fmt.Println(err.Error())
 		panic(err)
 	}
 	if err := Client.Ping(); err != nil {

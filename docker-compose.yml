@@ -1,0 +1,21 @@
+version: "3.1"
+services:
+  postgres:
+    image: postgres
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=secret
+      - POSTGRES_DB=root
+  redis:
+    image: redis
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "8081:8081"
+    depends_on:
+      - postgres
+      - redis
+    entrypoint: ["/app/wait-for", "postgres:5432", "--", "/app/main"]
+    # command: ["/app/main"]

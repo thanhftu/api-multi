@@ -21,10 +21,10 @@ func main() {
 	// 	MaxAge:           86400,
 	// }))
 
-	config := cors.DefaultConfig()
-	config.AllowOrigins = []string{"http://localhost:3000"}
-	config.AllowMethods = []string{"GET", "POST", "OPTIONS", "PUT", "DELETE"}
-	router.Use(cors.New(config))
+	// config := cors.DefaultConfig()
+	// config.AllowOrigins = []string{"http://localhost:3050"}
+	// config.AllowMethods = []string{"GET", "POST", "OPTIONS", "PUT", "DELETE"}
+	router.Use(cors.Default())
 	router.GET("/", controller.GetFibFromDB)
 	router.POST("/api/values", controller.GetWorkerResultHandler)
 	router.GET("/api/values/latest", controller.GetLatestFibHandler)
